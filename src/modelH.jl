@@ -17,21 +17,20 @@ include("initialize.jl")
 include("simulation.jl")
 
 function kinetic_energy(ϕ)
-    0.25 * sum(3 * ϕ.^2 - circshift(ϕ, (1,0,0)) .* circshift(ϕ, (-1,0,0))
-                        - circshift(ϕ, (0,1,0)) .* circshift(ϕ, (0,-1,0))
-                        - circshift(ϕ, (0,0,1)) .* circshift(ϕ, (0,0,-1)))
+    0.25 * sum(2 * ϕ.^2 - circshift(ϕ, (1,0)) .* circshift(ϕ, (-1,0))
+                        - circshift(ϕ, (0,1)) .* circshift(ϕ, (0,-1)))
 end
 
 function energy(state)
     K = kinetic_energy(state.ϕ)
-    (π1, π2, π3) = view_tuple(state.π)
-    K + sum(0.5 * (π1.^2 + π2.^2 + π3.^2 + 1/2 * m² * state.ϕ.^2 + λ/4 * state.ϕ.^2))
+    (π1, π2) = view_tuple(state.π)
+    K + sum(0.5 * (π1.^2 + π2.^2 + 1/2 * m² * state.ϕ.^2 + λ/4 * state.ϕ.^2))
 end
 
 function make_temp_arrays(state)
     (k1, k2, k3) = (similar(state.u), similar(state.u), similar(state.u))
     rk_temp = State(similar(state.u))
-    fft_temp = ArrayType{ComplexType}(undef, (L,L,L,3))
+    fft_temp = ArrayType{ComplexType}(undef, (L,L,2))
     (k1,k2,k3,rk_temp,fft_temp)
 end
 

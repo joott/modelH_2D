@@ -182,7 +182,7 @@ end
 @static if cpu
 
 function pi_sweep(π, n, m)
-    Threads.@threads for l in 0:3*L^2÷2-1
+    Threads.@threads for l in 0:L^2-1
         μ = l ÷ (L^2÷2) + 1
         i = (l ÷ L) % (L ÷ 2)
         j = l % L
@@ -206,7 +206,7 @@ function _pi_sweep(π, n, m)
     index = (blockIdx().x - 1) * blockDim().x + threadIdx().x - 1
     stride = gridDim().x * blockDim().x
 
-    for l in index:stride:3*L^2÷2-1
+    for l in index:stride:L^2-1
         μ = l ÷ (L^2÷2) + 1
         i = (l ÷ L) % (L ÷ 2)
         j = l % L
