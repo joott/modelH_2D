@@ -10,7 +10,7 @@ function parse_commandline()
 
     @add_arg_table s begin
         "--mass"
-            help = "mass as an offset from the critical mass m²c"
+            help = "mass parameter"
             arg_type = Float64
             default = 0.0
         "--dt"
@@ -105,7 +105,7 @@ end
 function hotstart(n, n_components)
 	u = rand(ξ, n, n, n_components)
 
-    for i in 1:3
+    for i in 1:n_components
         u[:,:,i] .-= shuffle(u[:,:,i])
     end
 
