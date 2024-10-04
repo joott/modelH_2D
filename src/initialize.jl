@@ -10,7 +10,7 @@ function parse_commandline()
 
     @add_arg_table s begin
         "--mass"
-            help = "mass parameter"
+            help = "mass shift from m²c"
             arg_type = Float64
             default = 0.0
         "--dt"
@@ -81,7 +81,7 @@ const T = FloatType(1.0)
 const L = parsed_args["size"]
 const η = FloatType(parsed_args["viscosity"])
 const ρ = FloatType(parsed_args["rho"])
-const m² = FloatType(parsed_args["mass"])
+const m² = FloatType(-3.824 + parsed_args["mass"])
 const Δt = FloatType(parsed_args["dt"]/Γ)
 
 const Δtdet = Δt
