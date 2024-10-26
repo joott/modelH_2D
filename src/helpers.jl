@@ -29,7 +29,7 @@ macro d2_xy(A)
     esc(:(
          ($A[$NNp2($ix),$iy] + $A[$NNm2($ix),$iy]
         + $A[$ix,$NNp2($iy)] + $A[$ix,$NNm2($iy)]
-        - 6*$A[$ix,$iy]) * 0.25
+        - 4*$A[$ix,$iy]) * 0.25
     ))
 end
 
