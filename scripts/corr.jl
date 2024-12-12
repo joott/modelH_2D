@@ -6,7 +6,7 @@ using CodecZlib
 using LsqFit
 
 const N = 64
-const mass = ARGS[1]
+const mass = parse(Float64, ARGS[1])
 const Δt = 0.04
 
 function autocor_loc_2(x, t, beg, max, n=2)
@@ -19,10 +19,10 @@ function autocor_loc_2(x, t, beg, max, n=2)
 			@inbounds N[tau+1] = N[tau+1] + 1
 		end
 	end
-    (t[1:max+1] * Δt,  real.(C) ./ (N * real(C[1])))
+    (t[1:max+1] * Δt,  real.(C) ./ real(C[1]))
 end
 
 df=readdlm("output_H_phi_L_$(N)_eta_0.1_mass_$(mass).dat",' ')
-(t, C) = autocor_loc_2((df[:,2].+df[:,3].*1.0im), df[:,1], 1, N^3, 1)
+(t, C) = autocor_loc_2((df[:,2].+df[:,3].*1.0im), df[:,1], 1, N^2, 1)
 
 jldsave("corr_phi_L_$(N)_mass_$(mass).jld2", true; t, C, mass)
