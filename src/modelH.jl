@@ -28,8 +28,8 @@ function energy(state)
 end
 
 function make_temp_arrays(state)
-    (k1, k2, k3) = (similar(state.u), similar(state.u), similar(state.u))
-    rk_temp = State(similar(state.u))
+    (k1, k2, k3) = (zeros(L,L,3), zeros(L,L,3), zeros(L,L,3))
+    rk_temp = State(zeros(L,L,3))
     fft_temp = ArrayType{ComplexType}(undef, (L,L,2))
     (k1,k2,k3,rk_temp,fft_temp)
 end
