@@ -7,8 +7,8 @@ include("../src/modelH.jl")
 
 function main()
     @init_state
-    #fft_temp = ArrayType{ComplexType}(undef, (L,L,2))
-    arrays = make_temp_arrays(state)
+    # fft_temp = ArrayType{ComplexType}(undef, (L,L,2)) # required as argument for prethermalize(...)
+    arrays = make_temp_arrays(state) # required as argument for thermalize(...)
     mass_id = round(m²,digits=3)
     for i in 1:L
         thermalize(state, arrays, m², L^3)

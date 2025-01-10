@@ -81,7 +81,8 @@ const T = FloatType(1.0)
 const L = parsed_args["size"]
 const η = FloatType(parsed_args["viscosity"])
 const ρ = FloatType(parsed_args["rho"])
-const m² = FloatType(-3.824 + parsed_args["mass"])
+const m²c = FloatType(-3.824)
+const m² = FloatType(m²c + parsed_args["mass"])
 const Δt = FloatType(parsed_args["dt"]/Γ)
 
 const Δtdet = Δt
